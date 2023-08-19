@@ -1,9 +1,9 @@
-# Equipe `<uniaovasko>`
+# Equipe `uniaovasko`
 
-# Subgrupo `<SUKO>`
-* `<Henrique Marques de Martim>` - `<248333>`
-* `<Leandro Henrique Silva Resende>` - `<213437>`
-* `<Matheus Mantovani Meneghel>` - `<230906>`
+# Subgrupo `B`
+* `Henrique Marques de Martim` - `248333`
+* `Leandro Henrique Silva Resende` - `213437`
+* `Matheus Mantovani Meneghel` - `230906`
 
 ## Modelo Conceitual ER
 
