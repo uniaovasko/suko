@@ -5,15 +5,9 @@
 * `Leandro Henrique Silva Resende` - `213437`
 * `Matheus Mantovani Meneghel` - `230906`
 
-## Modelo Conceitual ER Revisado
+## Modelo Conceitual ER Original
 
-> Coloque aqui o diagrama entidade-relacionamento original ou revisado para transformação em modelo relacional. O diagrama deve atributos, cardinalidade e entidades fracas.
->
-> Indique abaixo do diagrama (como no exemplo), se é o original ou o revisado.
->
-> Não é necessário colocar o diagrama UML revisado.
-
-<img src="images/ER_Diagram_MMORPG.png" width="400px" height="auto">
+<img src="images/ER_lab03.png" width="400px" height="auto">
 
 *Diagrama ER Original*
 
