@@ -13,11 +13,15 @@
 
 ## Mapeamento para o Modelo Relacional
 
-> Coloque aqui o modelo relacional que mapeia o modelo ER (original ou revisado). Nesse modelo deve constar o esquema das relações, com as chaves primárias e estrangeiras. A especificação de tipos de atributos é opcional.
-
-> Exemplo de modelo lógico relacional
 ~~~
-PESSOA(_Código_, Nome, Telefone)
-ARMÁRIO(_Código_, Tamanho, Ocupante)
-  Ocupante chave estrangeira -> PESSOA(Código)
+ALUNO(_idAluno_, nutrientesConsumidos, numRefeicoes, idRefeicao)
+  idRefeicao chave estrangeira -> REFEICAO(idRefeicao)
+CARDAPIO(_tipo_, _data_, _horario_, _idPorcao_, valoresNutricionais)
+  idPorcao chave estrangeira -> PORCOES(idPorcao)
+PORCOES(_idPorcao_, _ingrediente_, valoresNutricionais, nome, rankingPopularidade)
+  ingrediente chave estrangeira -> INGREDIENTE(nome)
+INGREDIENTE(_nome_, valorNutricional, tipo)
+  /*Ingredientes compostos por outros ingredientes serao tratados como porcoes*/
+REFEICAO(_idRefeicao_, _porcao_)
+  porcao chave estrangeira -> PORCOES(idPorcao)
 ~~~
