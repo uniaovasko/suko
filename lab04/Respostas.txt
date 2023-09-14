@@ -1,0 +1,37 @@
+1)
+SELECT Food_Code, FCID_Code, Ingredient_Num, Commodity_Weight
+FROM Recipes
+WHERE Food_Code = 27111300
+    AND Mod_Code = 0;
+    
+2)
+SELECT Recipes.Food_code, Recipes.FCID_Code, Recipes.Ingredient_Num, Recipes.Commodity_Weight, FCID_Description.FCID_Desc
+FROM Recipes, FCID_Description
+WHERE Recipes.Food_Code = 27111300
+    AND Recipes.Mod_code = 0
+    AND FCID_Description.FCID_Code = Recipes.FCID_Code;
+    
+3)
+SELECT DISTINCT Crop_Group.Crop_Group_Description
+FROM FCID_Description, recipes, Crop_Group
+WHERE Recipes.Food_Code = 27111300
+    AND REcipes.Mod_Code = 0
+    AND FCID_Description.FCID_Code = Recipes.FCID_Code
+    AND Crop_Group.CGN = Crop_Group.CGL
+    AND Crop_Group.CGN = FCID_Description.CGN;
+    
+4)
+SELECT FCID_Description.FCID_Desc, COUNT(*) VezesUtilizado
+FROM FCID_Description, Recipes
+WHERE FCID_Description.FCID_Code = Recipes.FCID_Code
+    GROUP BY FCID_Description.FCID_Desc
+    ORDER by VezesUtilizado DESC;
+    
+5)
+SELECT Crop_Group.Crop_Group_Description, SUM(Intake.Intake)SOMA
+FROM Crop_Group, FCID_Description, Intake
+WHERE Intake.FCID_Code = FCID_Description.FCID_Code
+    AND Crop_Group.CGN = FCID_Description.CGN
+    AND Crop_Group.CGN = Crop_Group.CGL
+GROUP BY Crop_Group.CGN
+ORDER BY SOMA DESC;
