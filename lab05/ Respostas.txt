@@ -12,7 +12,7 @@ CREATE VIEW visao AS
     		ORDER BY F.FCID_Desc;
 
 2)
-SELECT FCID_Desc, Popularity, Intake_Sum FROM visao2
+SELECT FCID_Desc, Popularity, Intake_Sum FROM visao
     ORDER BY Popularity DESC;
 
 3) 
