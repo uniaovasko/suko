@@ -1,5 +1,4 @@
-(1)
-
+1)
 CREATE VIEW visao AS
 	SELECT I.FCID_Code, F.FCID_Desc, F.CGN, F.CG_Subgroup, COUNT(DISTINCT SeqN) Popularity, SUM(I.Intake) Intake_Sum, AVG(I.Intake) Intake_AVG, AVG(I.Intake_BW) Intake_AVG_BW, A.Aparicoes
     		FROM Intake I, FCID_Description F, 
@@ -12,15 +11,16 @@ CREATE VIEW visao AS
     		GROUP BY F.FCID_Code, A.Aparicoes
     		ORDER BY F.FCID_Desc;
 
-(2)
-
+2)
 SELECT FCID_Desc, Popularity, Intake_Sum FROM visao2
     ORDER BY Popularity DESC;
 
-(3) 
-
+3) 
 SELECT I.SeqN Individuo,  MaisConsumido, 
     FROM Intake I, FCID_Description F,
     (SELECT I.SeqN)
     WHERE FCID_Description
     GROUP BY F.FCID_Desc;
+
+4)
+Não entendemos a requisição
