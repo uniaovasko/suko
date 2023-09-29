@@ -16,11 +16,15 @@ SELECT FCID_Desc, Popularity, Intake_Sum FROM visao
     ORDER BY Popularity DESC;
 
 3) 
-SELECT I.SeqN Individuo,  MaisConsumido, 
-    FROM Intake I, FCID_Description F,
-    (SELECT I.SeqN)
-    WHERE FCID_Description
-    GROUP BY F.FCID_Desc;
+SELECT J.SeqN, F.FCID_Desc
+    FROM Intake J, FCID_Description F,
+    (SELECT I.SeqN, MAX(I.Intake) Quantidade
+    FROM Intake I
+    GROUP BY I.SeqN) M
+    WHERE J.SeqN = M.SeqN
+    AND F.FCID_Code = J.FCID_Code
+    AND J.Intake = M.Quantidade
+    GROUP BY F.FCID_Desc, J.SeqN;
 
 4)
 Não entendemos a requisição
