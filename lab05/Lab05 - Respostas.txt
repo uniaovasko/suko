@@ -1,0 +1,26 @@
+(1)
+
+CREATE VIEW visao AS
+	SELECT I.FCID_Code, F.FCID_Desc, F.CGN, F.CG_Subgroup, COUNT(DISTINCT SeqN) Popularity, SUM(I.Intake) Intake_Sum, AVG(I.Intake) Intake_AVG, AVG(I.Intake_BW) Intake_AVG_BW, A.Aparicoes
+    		FROM Intake I, FCID_Description F, 
+        	(SELECT F.FCID_Code, COUNT(*) Aparicoes
+        		FROM FCID_Description F, Recipes R
+        		WHERE F.FCID_Code = R.FCID_Code
+        		GROUP BY F.FCID_Code) A
+    		WHERE I.FCID_Code = F.FCID_Code
+        		AND I.FCID_Code = A.FCID_Code
+    		GROUP BY F.FCID_Code, A.Aparicoes
+    		ORDER BY F.FCID_Desc;
+
+(2)
+
+SELECT FCID_Desc, Popularity, Intake_Sum FROM visao2
+    ORDER BY Popularity DESC;
+
+(3) 
+
+SELECT I.SeqN Individuo,  MaisConsumido, 
+    FROM Intake I, FCID_Description F,
+    (SELECT I.SeqN)
+    WHERE FCID_Description
+    GROUP BY F.FCID_Desc;
