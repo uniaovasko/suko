@@ -44,6 +44,7 @@ CREATE VIEW PesosMaximos AS
     FROM Pesos
     GROUP BY SeqN;
 
+#CRIA PERFIL POR INTERVALO DOS PESOS#
 CREATE VIEW GrupoPesos AS
     SELECT SeqN, CASE
                     WHEN Peso <= 20
@@ -68,6 +69,7 @@ CREATE VIEW maisConsPrd AS
     WHERE M.SeqN = I.SeqN
         AND M.Intake = I.Intake;
 
+#CRIA PERFIL POR GRUPO ALIMENTAR DO PRODUTO MAIS CONSUMIDO CONSUMIDO#
 CREATE VIEW maisConsGrp AS
     SELECT M.SeqN, F.CG_Subgroup
     FROM maisConsPrd M, FCID_Description F
@@ -82,6 +84,7 @@ CREATE VIEW maisConsGrpDesc AS
 
 (4)
 
+#CORRELACIONA OS DOIS PERFIS ANTERIORES#
 CREATE VIEW pesosEGrupos AS
     SELECT M.CG_Subgroup Subgrupo_Alimento, G.Grupo Grupo_Peso, COUNT(*) Contagem
     FROM maisConsGrp M, GrupoPesos G
