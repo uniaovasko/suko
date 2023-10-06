@@ -1,0 +1,93 @@
+(1)
+
+CREATE VIEW visao AS
+	SELECT I.FCID_Code, F.FCID_Desc, F.CGN, F.CG_Subgroup, COUNT(DISTINCT SeqN) Popularity, SUM(I.Intake) Intake_Sum, AVG(I.Intake) Intake_AVG, AVG(I.Intake_BW) Intake_AVG_BW, A.Aparicoes
+    		FROM Intake I, FCID_Description F, 
+        	(SELECT F.FCID_Code, COUNT(*) Aparicoes
+        		FROM FCID_Description F, Recipes R
+        		WHERE F.FCID_Code = R.FCID_Code
+        		GROUP BY F.FCID_Code) A
+    		WHERE I.FCID_Code = F.FCID_Code
+        		AND I.FCID_Code = A.FCID_Code
+    		GROUP BY F.FCID_Code, A.Aparicoes
+    		ORDER BY F.FCID_Desc;
+
+
+(2)
+
+CREATE VIEW visaoPopularidade AS
+    SELECT FCID_Code, Popularity
+    FROM visao
+    ORDER BY Popularity DESC;
+    
+CREATE VIEW visaoConsumo AS
+    SELECT FCID_Code, Intake_Sum
+    FROM visao
+    ORDER BY Intake_Sum DESC;
+
+SELECT VP.FCID_Code, VP.Popularity, VC.Intake_Sum, 
+((SELECT COUNT(*) FROM visaoPopularidade VP2 WHERE VP2.Popularity > VP.Popularity) + 1) Rank_Popularidade,
+((SELECT COUNT(*) FROM visaoConsumo VC2 WHERE VC2.Intake_Sum > VC.Intake_Sum) + 1) Rank_Consumo
+FROM visaoPopularidade VP, visaoConsumo VC
+WHERE VP.FCID_Code = VC.FCID_Code
+LIMIT 10;
+
+
+(3) 
+
+CREATE VIEW Pesos AS
+    SELECT SeqN, (Intake/Intake_BW) Peso
+    FROM Intake;
+
+CREATE VIEW PesosMaximos AS
+    SELECT SeqN, MAX(Peso) Peso 
+    FROM Pesos
+    GROUP BY SeqN;
+
+CREATE VIEW GrupoPesos AS
+    SELECT SeqN, CASE
+                    WHEN Peso <= 20
+                        THEN 1
+                    ELSE (CASE 
+                              WHEN Peso <= 100
+                                  THEN 2
+                                ELSE 3
+                            END)
+                END Grupo
+    FROM PesosMaximos;
+
+
+CREATE VIEW maisConsPes AS
+    SELECT SeqN, MAX(Intake) Intake
+    FROM Intake
+    GROUP BY SeqN;
+    
+CREATE VIEW maisConsPrd AS
+    SELECT M.SeqN, I.FCID_Code
+    FROM maisConsPes M, Intake I
+    WHERE M.SeqN = I.SeqN
+        AND M.Intake = I.Intake;
+
+CREATE VIEW maisConsGrp AS
+    SELECT M.SeqN, F.CG_Subgroup
+    FROM maisConsPrd M, FCID_Description F
+    WHERE M.FCID_Code = F.FCID_Code;
+
+CREATE VIEW maisConsGrpDesc AS
+    SELECT C.Crop_Group_Description, COUNT(*)
+    FROM maisConsGrp M, Crop_Group C
+    WHERE M.CG_Subgroup = C.CGL
+    GROUP BY C.Crop_Group_Description;
+
+
+(4)
+
+CREATE VIEW pesosEGrupos AS
+    SELECT M.CG_Subgroup Subgrupo_Alimento, G.Grupo Grupo_Peso, COUNT(*) Contagem
+    FROM maisConsGrp M, GrupoPesos G
+    WHERE M.SeqN = G.SeqN
+    GROUP BY M.CG_Subgroup, G.Grupo;
+
+
+
+
