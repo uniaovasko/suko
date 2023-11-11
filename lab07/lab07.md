@@ -1,5 +1,5 @@
 # Modelo lógico preliminar de grafo
-<img src="lab07/Modelo_Logico.png" width="400px" height="auto">
+<img src="Modelo_Logico.png" width="400px" height="auto">
 
 # Pergunta/Análises que podem ser implementadas pelo gráfico
 * Média de ingredientes por receita
