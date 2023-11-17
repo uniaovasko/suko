@@ -1,3 +1,5 @@
+(Não modificamos o modelo lógico)
+
 Utilizando as técnicas de análise de redes e com base no grafo e as perguntas do laboratório 7, elaboramos as seguintes respostas:
 
 Quais os subgrupos mais consumidos em peso?
