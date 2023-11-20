@@ -1,4 +1,12 @@
-(Não modificamos o modelo lógico)
+# Equipe `uniaovasko`
+
+# Subgrupo `B`
+* `Henrique Marques de Martim` - `248333`
+* `Leandro Henrique Silva Resende` - `213437`
+* `Matheus Mantovani Meneghel` - `230906`
+
+# Modelo lógico preliminar de grafo
+<img src="Modelo_Logico.png" width="400px" height="auto">
 
 # Utilizando as técnicas de análise de redes e com base no grafo e as perguntas do laboratório 7, elaboramos as seguintes respostas:
 
